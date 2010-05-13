@@ -1,0 +1,6 @@
+## Copyright: Vikas Kumar
+## Date: 13th May 2010
+## License: MIT License
+
+Oyster is a binary analyzer tool written in Perl (hence Oyster) for analyzing
+the data analysis of source code.
