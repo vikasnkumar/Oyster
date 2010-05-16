@@ -4,3 +4,6 @@
 
 Oyster is a binary analyzer tool written in Perl (hence Oyster) for analyzing
 the data analysis of source code.
+
+Requirements:
+You need GNU binutils and GNU coreutils installed, especially readelf and objdump.
