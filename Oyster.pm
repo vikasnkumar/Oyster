@@ -34,26 +34,12 @@ package Oyster;
 use warnings;
 use strict;
 
-# not importing symbols specifically to avoid conflicts in namespace.
-use Carp ();
-use Data::Dumper;
-
 our $VERSION = 0.001;
 
-sub AUTOLOAD {
-	our $AUTOLOAD;
-	Carp::carp "WARN: $AUTOLOAD function does not exist.\n";
-	return undef;
+sub Version {
+	return $VERSION;
 }
-
-sub new {
-	my $this = shift;
-	my $class = ref($this) || $this;
-	return bless({}, $class);
-}
-
-sub DESTROY {
-}
+require Oyster::Agent;
 
 # return true if the package is successfully loaded.
 1;

@@ -1,4 +1,3 @@
-#!/usr/bin/perl -w
 #############################################################################
 #############################################################################
 ## Copyright (c) Vikas Naresh Kumar
@@ -27,15 +26,53 @@
 #############################################################################
 #############################################################################
 
-use strict;
+####
+#Oyster is a pure Object Oriented Perl class.
+####
+
+package Oyster::Agent;
 use warnings;
-use Oyster;
-use Carp;
+use strict;
+
+# not importing symbols specifically to avoid conflicts in namespace.
+use Carp ();
 use Data::Dumper;
 
-croak 'Usage: validate.pl <executable>' if not defined $ARGV[0];
-my $oyster = Oyster::Agent->new;
-$oyster->compiler('gcc', '3.4.5', '/usr/bin/gcc');
-$oyster->compiler({ 'compiler' => 'gcc', 'version' => '123', 'path' =>
-		'/usr/bin/gcc'});
-print Dumper($oyster) if defined $oyster;
+our $VERSION = 0.001;
+
+sub AUTOLOAD {
+	our $AUTOLOAD;
+	Carp::carp "WARN: $AUTOLOAD function does not exist.\n";
+	return undef;
+}
+
+sub new {
+	my $this = shift;
+	my $class = ref($this) || $this;
+	return bless({}, $class);
+}
+
+sub compiler {
+	my $this = shift;
+	my $arg = shift;
+	print "hash\n" if ref($arg) eq 'HASH';
+	my ($compiler, $version, $path, $language) = @_;
+
+	unless (ref($this) eq __PACKAGE__) {
+		Carp::croak "FATAL: Oyster has not been created ";
+	}
+
+	$this->{compiler} = {
+		name => $compiler,
+		path => $path,
+		version => $version,
+		language => $language,
+	};
+	return 1;
+}
+
+sub DESTROY {
+}
+
+# return true if the package is successfully loaded.
+1;

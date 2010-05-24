@@ -7,3 +7,12 @@ the data analysis of source code.
 
 Requirements:
 You need GNU binutils and GNU coreutils installed, especially readelf and objdump.
+
+1. user provides the executable to the program.
+2. program checks for existence of readelf and parses readelf output for the executable
+3. program then stores the readelf format into a pseudo structure that enumerates each
+function and stores its variables keeping track of scope.
+4. the program can dump this into a YAML spec for the user to browse.
+5. the program then runs objdump on the file to retrieve dumps for each function and
+stores the dump in memory or in file.
+6.
